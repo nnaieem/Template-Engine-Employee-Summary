@@ -1,5 +1,6 @@
-
-
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const inquire = require("inquirer");
 const fs = require("fs");
 
@@ -129,7 +130,7 @@ function buildTeamList() {
 
 function buildHtmlPage() {
     let newFile = fs.readFileSync("./templates/main.html")
-    fs.writeFileSync("./output/teamPage.html", newFile, function (err) {
+    fs.writeFileSync("./teamPage.html", newFile, function (err) {
         if (err) throw err;
     })
 
@@ -144,7 +145,7 @@ function buildHtmlPage() {
             buildHtmlCard("intern", member.getName(), member.getId(), member.getEmail(), "School: " + member.getSchool());
         }
     }
-    fs.appendFileSync("./output/teamPage.html", "</div></main></body></html>", function (err) {
+    fs.appendFileSync("./teamPage.html", "</div></main></body></html>", function (err) {
         if (err) throw err;
     });
     console.log("Page tags closed! Operation completed.")
@@ -157,7 +158,7 @@ function buildHtmlCard(memberType, name, id, email, propertyValue) {
     data = data.replace("idHere", `ID: ${id}`);
     data = data.replace("emailHere", `Email: <a href="mailto:${email}">${email}</a>`);
     data = data.replace("propertyHere", propertyValue);
-    fs.appendFileSync("./output/teamPage.html", data, err => { if (err) throw err; })
+    fs.appendFileSync("./teamPage.html", data, err => { if (err) throw err; })
     console.log("Card appended");
 }
 
